@@ -1,0 +1,24 @@
+.ongkir-header {
+    margin-bottom: 50px;
+}
+
+.card-deck .card {
+    min-width: 220px;
+}
+
+.card-deck .card-body {
+    padding: 3rem;
+}
+
+.card-deck .card-header {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.card-deck .card-header h4 {
+    margin-bottom: 0;
+}
+
+.card-deck .card-body i {
+    color: #007bff;
+}
