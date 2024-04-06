@@ -1060,7 +1060,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0"
+                "php": "^8.1.10"
             },
             "require-dev": {
                 "codedungeon/phpunit-result-printer": "^0.26.2",
