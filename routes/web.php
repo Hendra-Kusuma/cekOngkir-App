@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/api/province/{id}/cities', [HomeController::class, 'getCities']);
 Route::post('/store', [HomeController::class,'store'])->name('store');

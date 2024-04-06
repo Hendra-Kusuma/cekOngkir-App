@@ -63,13 +63,21 @@ class HomeController extends Controller
         return json_encode($response);
     }
 
+    public function getCity($code) {
+        return City::where('code', $code)->first();
+    }
 
     public function store(Request $request)
     {
         $courier = $request->input('courier');
         // dd($courier);
         if($courier){
-            $result = [];
+            $data = [
+                'origin' => $this->getCity($request->origin_city),
+                'destination' => $this->getCity($request->destination_city),
+                'weight' => 1300,
+                'result' => []
+            ];
             foreach ($courier as $row) {
                 $ongkir = RajaOngkir::ongkosKirim([
                     'origin'        => $request->origin_city,     // ID kota/kabupaten asal
@@ -77,33 +85,11 @@ class HomeController extends Controller
                     'weight'        => 1300,    // berat barang dalam gram
                     'courier'       => $row    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
                 ])->get();
-                $result[] = $ongkir;
-            }
+                $data['result'][] = $ongkir;
         }
-        return $result;
+        // dd($data);
+        return view('cost')->with($data);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    return redirect()->back();
+}
 }
