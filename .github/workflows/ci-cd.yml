@@ -1,0 +1,33 @@
+name: cek Ongkir-App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies and Run Tests
+        run: |
+          composer install --no-interaction --no-progress --no-suggest
+          cp .env.example .env
+          php artisan key:generate
+          php artisan migrate --force --no-interaction
+          php artisan db:seed
+          php artisan test
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel_token: ${{ secrets.VERCEL_TOKEN }}

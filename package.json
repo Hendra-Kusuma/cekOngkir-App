@@ -12,5 +12,12 @@
         "sass": "^1.72.0",
         "sass-loader": "^12.1.0",
         "vite": "^5.0.0"
-    }
+    },
+    "dependencies": {
+        "vercel": "^33.7.0"
+    },
+
+    "engines": {
+        "node": "18.x"
+      }
 }
